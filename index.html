@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My GST Filling</title>
+    <link rel="stylesheet" href="gst.css">
+    <script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script>
+</head>
+<body>
+    
+    <div id="main">
+        <nav>
+            <header>
+                <ul>
+                    <div><span class="iconify" data-icon="clarity:rupee-solid"></span></div>
+                    <div></div>
+                </ul>
+            </header>
+        </nav>
+
+        <div id="container">
+            <div id="left">
+                <div style="font-size: xx-large;">Fill Details</div>
+                <div>
+                    <select id="partyName">
+                        <option>Select Party</option>
+                    </select>
+                    <form>
+                        <label for="date">Date</label>
+                        <input type="date" id="date">
+
+                        <label for="invoiceNumber">Invoice Number</label>
+                        <input type="text" id="invoiceNumber" placeholder="Enter Unvoice Number">
+
+                        <select id="type">
+                            <option value="cloth">Cloth</option>
+                            <option value="bag">Bag</option>
+                            <option value="other">Other</option>
+                        </select>
+
+                        <label for="qty"></label>
+                        <input type="text" id="qty" placeholder="Enter Quantity">
+
+                        <select id="unit" style="width: 20%;">
+                            <option value="mtr">Meter</option>
+                            <option value="pcs">Pcs.</option>
+                        </select>
+
+                        <select id="cgst">
+                            <option value="SGST/CGST">SGST/CGST</option>
+                            <option value="IGST">IGST</option>
+                        </select>
+
+                        <label for="total">Enter Total Amount</label>
+                        <input type="number" id="total" placeholder="Enter Amount">
+                        <input type="submit">
+                    </form>
+                </div>
+            </div>
+            <div id="right">
+                <div class="right_header">Party Details</div>
+                <div class="right_main"></div>
+                <div class="table">
+                    <button onclick="window.location.href= 'print.html'">Done/Print</button>
+                    <button onclick="newGST()">New/Start Over</button>
+                    <button>Save</button>
+                    <button onclick="addNewParty()">Add New Party</button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>GST Number</th>
+                                <th>Date</th>
+                                <th>Bill No.</th>
+                                <th>Item Type</th>
+                                <th>Quantity</th>
+                                <th>Tax Category</th>
+                                <th>Amount</th>
+                                <th>Tax (5%)</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tbody1"></tbody>
+                    </table>
+
+                    <h4 id="totalAmount"></h4>
+                    <h4 id="totalTax"></h4>
+                    <h2 id="totalPurchase"></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script src="gst.js"></script>

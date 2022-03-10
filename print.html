@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        .container {
+            width: 95%;
+            margin: auto;
+        }
+
+        table{
+            width: 100%;
+            margin: auto;
+            text-align: center;
+            margin-bottom: 8%;
+        }
+
+        table, th, td {
+            border: 1px solid rgb(0, 0, 0);
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>GST Number</th>
+                    <th>Date</th>
+                    <th>Bill No.</th>
+                    <th>Item Type</th>
+                    <th>Quantity</th>
+                    <th>Tax Category</th>
+                    <th>Amount</th>
+                    <th>Tax (5%)</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+            <tbody id="tbody1"></tbody>
+        </table>
+
+        <h4 id="totalAmount"></h4>
+        <h4 id="totalTax"></h4>
+        <h2 id="totalPurchase"></h2>
+    </div>
+</body>
+</html>
+
+<script>
+
+    var taxFillingDetails = JSON.parse(localStorage.getItem("taxFilledData")) || [];
+
+    print();
+
+    function print() {
+
+        document.querySelector("#tbody1").innerHTML = "";
+
+        taxFillingDetails.map(function (items, index) {
+
+            var tr = document.createElement("tr");
+
+            var td1 = document.createElement("td");
+            td1.textContent = items.Name;
+
+            var td2 = document.createElement("td");
+            td2.textContent = items.Address;
+
+            var td3 = document.createElement("td");
+            td3.textContent = items.GST;
+
+            var td4 = document.createElement("td");
+            td4.textContent = items.Date;
+
+            var td5 = document.createElement("td");
+            td5.textContent = items.invoiceNumber;
+
+            var td6 = document.createElement("td");
+            td6.textContent = items.Type;
+
+            var td7 = document.createElement("td");
+            td7.textContent = `${items.Quantity} ${items.Unit}`;
+
+            var td8 = document.createElement("td");
+            td8.textContent = items.Tax;
+
+            var td9 = document.createElement("td");
+            td9.textContent = items.TaxCategory;
+
+            var td10 = document.createElement("td");
+            td10.textContent = items.TaxAmount;
+
+            var td11 = document.createElement("td");
+            td11.textContent = items.Tax;
+
+            var td12 = document.createElement("td");
+            td12.textContent = items.Total;
+
+            tr.append(td1, td2, td3, td4, td5, td6, td7, td9, td10, td8, td12);
+
+            document.querySelector("#tbody1").append(tr);
+        });
+
+
+        var amount = taxFillingDetails.reduce(function(a, b) {
+            return (a + +b.TaxAmount);
+        }, 0);
+
+        document.querySelector("#totalAmount").textContent = `Total Amount without GST = ${amount.toFixed(2)}`;
+
+        var tax = taxFillingDetails.reduce(function(a, b) {
+            return (a + +b.Tax);
+        }, 0);
+
+        document.querySelector("#totalTax").textContent = `Total Tax Paid = ${tax.toFixed(2)}`;
+
+        var totalPurchase = taxFillingDetails.reduce(function(a, b) {
+            return (a + +b.Total);
+        }, 0);
+
+        document.querySelector("#totalPurchase").textContent = `Total Purchase Amount = ${totalPurchase}`;
+
+    }
+    
+</script>
